@@ -41,7 +41,7 @@ public class Planta extends JFrame {
 			}
 		});
 	}
-
+/*!!
 	/**
 	 * Create the frame.
 	 */
