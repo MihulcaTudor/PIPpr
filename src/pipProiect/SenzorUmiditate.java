@@ -10,6 +10,7 @@ public class SenzorUmiditate {
      
         Context pi4j = Pi4J.newAutoContext();
 
+        System.out.println("TEST TEST");
       
         var config = DigitalInput.newConfigBuilder(pi4j)
                 .id("senzor-umiditate")
