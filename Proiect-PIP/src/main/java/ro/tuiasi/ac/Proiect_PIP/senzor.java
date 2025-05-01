@@ -30,5 +30,6 @@ public class senzor {
             }
             Thread.sleep(1000);
         }
+        pi4j.shutdown();
     }
 }
