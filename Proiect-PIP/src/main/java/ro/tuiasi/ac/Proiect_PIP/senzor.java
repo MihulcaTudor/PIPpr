@@ -3,6 +3,7 @@ package ro.tuiasi.ac.Proiect_PIP;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.*;
+import com.pi4j.util.Console;
 
 public class senzor {
     public static void main(String[] args) throws InterruptedException {
