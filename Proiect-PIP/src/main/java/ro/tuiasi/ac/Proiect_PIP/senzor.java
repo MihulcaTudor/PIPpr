@@ -9,7 +9,7 @@ public class senzor {
     public static void main(String[] args) throws InterruptedException {
 //!!!!!!
         // Inițializează Pi4J
-        final var console = new Console();
+        
         Context pi4j = Pi4J.newAutoContext();
 
         // Configurează pinul GPIO17 ca input digital
@@ -26,12 +26,12 @@ public class senzor {
         // Citim senzorul la fiecare secundă
         while (true) {
             if (sensor.state().isHigh()) {
-                console.println("sol uscat");
+                System.out.println("sol uscat");
             } else {
-                console.println("solul este umed!");
+                System.out.println("solul este umed!");
             }
             Thread.sleep(1000);
         }
-        pi4j.shutdown();
+        
     }
 }
