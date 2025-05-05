@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -14,8 +16,12 @@ import java.awt.geom.Point2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.Meniuprincipal.CircleButton;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.CardLayout;
 
 public class Planta extends JFrame {
 	
@@ -27,7 +33,9 @@ public class Planta extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private CardLayout cardlayout;
 	private JPanel contentPane;
+	//private JPanel help;
 	private JTextField textField;
 
 	/**
@@ -48,103 +56,7 @@ public class Planta extends JFrame {
 		});
 	}
 
-  public class CircleButton extends JButton{
-
-			/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-			private boolean mouseOver = false;
-			private boolean mousePressed = false;
-
-			public CircleButton(String text){
-				super(text);
-				setOpaque(false);
-				setFocusPainted(false);
-				setBorderPainted(false);
-
-				MouseAdapter mouseListener = new MouseAdapter(){
-
-					@Override
-					public void mousePressed(MouseEvent me){
-						if(contains(me.getX(), me.getY())){
-							mousePressed = true;
-							repaint();
-						}
-					}
-
-					@Override
-					public void mouseReleased(MouseEvent me){
-						mousePressed = false;
-						repaint();
-					}
-
-					@Override
-					public void mouseExited(MouseEvent me){
-						mouseOver = false;
-						mousePressed = false;
-						repaint();
-					}
-
-					@Override
-					public void mouseMoved(MouseEvent me){
-						mouseOver = contains(me.getX(), me.getY());
-						repaint();
-					}
-				};
-
-				addMouseListener(mouseListener);
-				addMouseMotionListener(mouseListener);		
-			}
-
-			private int getDiameter(){
-				int diameter = Math.min(getWidth(), getHeight());
-				return diameter;
-			}
-
-			@Override
-			public Dimension getPreferredSize(){
-				FontMetrics metrics = getGraphics().getFontMetrics(getFont());
-				int minDiameter = 10 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());
-				return new Dimension(minDiameter, minDiameter);
-			}
-
-			@Override
-			public boolean contains(int x, int y){
-				int radius = getDiameter()/2;
-				return Point2D.distance(x, y, getWidth()/2, getHeight()/2) < radius;
-			}
-
-			@Override
-			public void paintComponent(Graphics g){
-
-				int diameter = getDiameter();
-				int radius = diameter/2;
-
-				if(mousePressed){
-					g.setColor(Color.LIGHT_GRAY);
-				}
-				else{
-					g.setColor(Color.WHITE);
-				}
-				g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
-
-				if(mouseOver){
-					g.setColor(Color.BLUE);
-				}
-				else{
-					g.setColor(Color.BLACK);
-				}
-				g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
-
-				g.setColor(Color.BLACK);
-				g.setFont(getFont());
-				FontMetrics metrics = g.getFontMetrics(getFont());
-				int stringWidth = metrics.stringWidth(getText());
-				int stringHeight = metrics.getHeight();
-				g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);
-			}
-		}
+  
  
 	/**
 	 * Create the frame.
@@ -155,24 +67,40 @@ public class Planta extends JFrame {
 		
 		
 		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 384);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setBackground(new Color(173,235,179));
+		cardlayout=new CardLayout();
+		contentPane = new JPanel(cardlayout);
+		this.add(contentPane);
+		this.setVisible(true);
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(162, 231, 270, 73);
-		contentPane.add(textField);
-		textField.setColumns(10);
-		textField.setBackground(new Color (128,239,128));
+		Help help=new Help();
+		Meniuprincipal meniuprincipal=new Meniuprincipal();
 		
-		CircleButton btnHelp = new CircleButton("?");
+		contentPane.add(meniuprincipal,"Main Menu");
+		contentPane.add(help,"Help");
+		
+		CircleButton btnHelp =meniuprincipal.new CircleButton("?");
 		btnHelp.setBounds(10, 10, 85, 21);
-		contentPane.add(btnHelp);
+		btnHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("buton help apasat");
+				cardlayout.show(contentPane,"Help");
+			}
+		});
+		meniuprincipal.add(btnHelp);
+		
+	
+		
+		
+		
+		
+		
+		
+		
 		
 	}
 }
