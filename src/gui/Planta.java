@@ -83,33 +83,7 @@ public class Planta extends JFrame {
 	 * Create the frame.
 	 */
 	
-//	void startReadingFilePeriodically(String filePath) {
-//        
-//
-//       
-//            try {
-//                @SuppressWarnings("resource")
-//				String valueStr = new BufferedReader(new FileReader(filePath)).readLine();
-//                if (valueStr != null) {
-//                    int value = Integer.parseInt(valueStr.trim());
-//
-//                    
-//                        if (value == 1) {
-//                        	low.setVisible(false);
-//                            high.setVisible(true);
-//                            
-//                        } else if (value == 0) {
-//                            high.setVisible(false);
-//                            low.setVisible(true);
-//                        } else {
-//                            System.out.println("val necunoscuta");
-//                        }
-//                   
-//                }
-//            } catch (IOException | NumberFormatException e) {
-//                System.err.println("Eroare la citirea fisierului: " + e.getMessage());
-//            }
-//        }
+
     
  
 	
@@ -153,7 +127,9 @@ public class Planta extends JFrame {
 		});
 		help.add(btnBack);
 		
+		//labeluri de forma pentru testare
 		
+		//high pentru sol umed
 		JLabel high=new JLabel();
 		ImageIcon happy=new ImageIcon("src/gui/images/happy.png");
 		high.setOpaque(true);
@@ -169,7 +145,7 @@ public class Planta extends JFrame {
 		
 		
 		
-		
+		//low pt sol uscat
 		JLabel low=new JLabel();
 		ImageIcon sad=new ImageIcon("src/gui/images/sad.png");
 		high.setOpaque(true);
@@ -182,33 +158,36 @@ public class Planta extends JFrame {
 		low.setVisible(false);
 		
 		
-		startMonitoring();
+		startMonitoring(); // functia defiita mai jos
 		
 		
 		
 	}
 	private void startMonitoring() {
-        Thread monitor = new Thread(new Runnable() {
+        Thread monitor = new Thread(new Runnable() { //thread nou pt citit  constant
             public void run() {
                 while (true) {
+                	//bucla infinita 
                     try {
                         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\AIDUL\\git\\PIPpr\\src\\gui\\umiditate.txt"));
                         String valoare = reader.readLine();
                         reader.close();
+                        //cititor din fisier cu pathul de la mmn din calculator, am incercat si cu pathul de la package explorer dat nu e bun
 
-                        if (valoare != null && !valoare.equals(ultimaValoare)) {
+                        if (valoare != null) {
+                        	//deci compara valoarea citita cu cea anterioara si numara de cate ori a fost consecutiv
                             ultimaValoare = valoare;
 
                             if (valoare.equals("1")) {
-                                countOne++;
-                                updateStatus(1);
+                                countOne++; //contor pt 1
+                                updateStatus(1); //functia mai jos
                             } else if (valoare.equals("0")) {
-                                countZero++;
+                                countZero++; //contor pt 0
                                 updateStatus(0);
                             }
                         }
 
-                        Thread.sleep(500);
+                        Thread.sleep(500); //citeste de doua ori pe min
                     } catch (Exception e) {
                         System.err.println("Eroare: " + e.getMessage());
                     }
@@ -221,25 +200,27 @@ public class Planta extends JFrame {
 
     private void updateStatus(final int valoare) {
         
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+        SwingUtilities.invokeLater(new Runnable() { //sincer nu stiu ce e asta mi a sugerat chat sa fol invokelater SwingUtilities.invokeLater() este o metoda statica din Java Swing care iti permite sa rulezi cod pe firul grafic (EDT - Event Dispatch Thread).
+
+
+            public void run() { //daca citeste 1 o data planta ok
                 if (valoare == 1) {
                     if (countOne == 1) {
                     		
                        System.out.println("Sol umed - Planta este fericita ");
                         
-                    } else {
+                    } else { //daca citeste de mai multe ori prea uda
                     	System.out.println("Prea multa apa! (" + countOne + " valori de 1) ");
                        
                     }
                 } else {
-                    if (countZero == 1) {
+                    if (countZero == 1) { //daca citeste 0 o data planta uscata
                     	System.out.println("Sol uscat - Poate e timpul sa udam planta curand ");
                         
-                    } else {
+                    } else { //daca citeste de mai multe ori etc
                     	System.out.println("Sol prea uscat! (" + countZero + " valori de 0)");
                         
-                    }
+                    }//aici voiam sa pun mai multe optiuni, asta e doar de forma , gen sa numere un anumit nr sa fie mai multe variante
                 }
             }
         });
