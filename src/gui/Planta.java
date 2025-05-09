@@ -13,6 +13,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +28,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.CardLayout;
@@ -44,6 +51,12 @@ public class Planta extends JFrame {
 	private JLabel high;
 	private JLabel mid;
 	private JLabel low;
+
+	protected String ultimaValoare;
+
+	protected int countOne;
+
+	protected int countZero;
 
 	/**
 	 * Launch the application.
@@ -70,8 +83,38 @@ public class Planta extends JFrame {
 	 * Create the frame.
 	 */
 	
+//	void startReadingFilePeriodically(String filePath) {
+//        
+//
+//       
+//            try {
+//                @SuppressWarnings("resource")
+//				String valueStr = new BufferedReader(new FileReader(filePath)).readLine();
+//                if (valueStr != null) {
+//                    int value = Integer.parseInt(valueStr.trim());
+//
+//                    
+//                        if (value == 1) {
+//                        	low.setVisible(false);
+//                            high.setVisible(true);
+//                            
+//                        } else if (value == 0) {
+//                            high.setVisible(false);
+//                            low.setVisible(true);
+//                        } else {
+//                            System.out.println("val necunoscuta");
+//                        }
+//                   
+//                }
+//            } catch (IOException | NumberFormatException e) {
+//                System.err.println("Eroare la citirea fisierului: " + e.getMessage());
+//            }
+//        }
+    
+ 
 	
 	public Planta() {
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 384);
@@ -139,6 +182,74 @@ public class Planta extends JFrame {
 		low.setVisible(false);
 		
 		
+		startMonitoring();
+		
+		
+		
+	}
+	private void startMonitoring() {
+        Thread monitor = new Thread(new Runnable() {
+            public void run() {
+                while (true) {
+                    try {
+                        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\AIDUL\\git\\PIPpr\\src\\gui\\umiditate.txt"));
+                        String valoare = reader.readLine();
+                        reader.close();
+
+                        if (valoare != null && !valoare.equals(ultimaValoare)) {
+                            ultimaValoare = valoare;
+
+                            if (valoare.equals("1")) {
+                                countOne++;
+                                updateStatus(1);
+                            } else if (valoare.equals("0")) {
+                                countZero++;
+                                updateStatus(0);
+                            }
+                        }
+
+                        Thread.sleep(500);
+                    } catch (Exception e) {
+                        System.err.println("Eroare: " + e.getMessage());
+                    }
+                }
+            }
+        });
+
+        monitor.start();
+    }
+
+    private void updateStatus(final int valoare) {
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if (valoare == 1) {
+                    if (countOne == 1) {
+                    		
+                       System.out.println("Sol umed - Planta este fericita ");
+                        
+                    } else {
+                    	System.out.println("Prea multa apa! (" + countOne + " valori de 1) ");
+                       
+                    }
+                } else {
+                    if (countZero == 1) {
+                    	System.out.println("Sol uscat - Poate e timpul sa udam planta curand ");
+                        
+                    } else {
+                    	System.out.println("Sol prea uscat! (" + countZero + " valori de 0)");
+                        
+                    }
+                }
+            }
+        });
+    }
+
+		
+		
+		
+		  
+		
 		
 		
 		
@@ -149,4 +260,4 @@ public class Planta extends JFrame {
 		
 		
 	}
-}
+
