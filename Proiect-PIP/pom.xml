@@ -116,6 +116,19 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.6.1</version>
         </plugin>
+	      <!-- Plugin pentru a adăuga clasa principală în JAR -->
+    	<plugin>
+     	 <groupId>org.apache.maven.plugins</groupId>
+      	<artifactId>maven-jar-plugin</artifactId>
+	<version>3.4.2</version>
+      <configuration>
+        <archive>
+          	<manifest>
+            		<mainClass>ro.tuiasi.ac.Proiect_PIP.senzor</mainClass>
+          	</manifest>
+        </archive>
+      </configuration>
+    </plugin>
       </plugins>
     </pluginManagement>
   </build>
