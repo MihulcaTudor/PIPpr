@@ -14,29 +14,32 @@ public class ImageLabel extends GradientLabel {
 	public ImageLabel(String text) {
 		super(text);
 		initializarepoze();
+		setVisible(true);
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	ImageIcon icnhappy;
 	ImageIcon icnsad;
-	  int countOne = 0;
-	  int countZero = 0;
+	 int countOne = 0;
+	 int countZero = 0;
+	 
 	 public void initializarepoze()
 	    {
 	    	ImageIcon sad=new ImageIcon("src/gui/images/sad.png");
-	    	
-			setOpaque(true);
+	    	setOpaque(true);
 			setBounds(250, 75, 300, 300);
 			Image imgsad = sad.getImage().getScaledInstance(
 				   getWidth(), getHeight(), Image.SCALE_SMOOTH);
 			 icnsad = new ImageIcon(imgsad);
 			
 			ImageIcon happy=new ImageIcon("src/gui/images/happy.png");
+			setOpaque(true);
 			Image imghappy = happy.getImage().getScaledInstance(
 					   getWidth(), getHeight(), Image.SCALE_SMOOTH);
 			 icnhappy = new ImageIcon(imghappy);
 			
-			setVisible(true);
+			
 			
 			
 	    }
