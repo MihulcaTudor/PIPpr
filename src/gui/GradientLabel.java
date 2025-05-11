@@ -18,8 +18,13 @@ public class GradientLabel extends JLabel {
 	 private int countZero = 0;
 	 
 		
-		
+	/**
+	 * Constructor pentru GradiendLabel: seteaza textul, culoarea si fontul textului, alinierea
+	 * @param text
+	 * textul afisat pe label
+	 */
     public GradientLabel(String text) {
+    	
         super(text);
         setOpaque(false); // 
         setForeground(Color.WHITE);
@@ -28,6 +33,15 @@ public class GradientLabel extends JLabel {
         setVerticalAlignment(SwingConstants.CENTER);
     }
 
+    /**
+     * Functie pentru afisarea textului respectiv nivelului de umiditate: pentru valori de 1, solul este OK, textul afisat corespunzator.-VERDE 
+     * Pentru prea multe valori de 1 consecutive Labelul isi va schimba culoarea datorita udarii excesive.- GALBEN
+     * Pentru mai putin de 20 de valori consecutive de 0, solul este uscat insa nu este o urgenta . GALBEN
+     * Pentru mai mult de 20 de valori de 0, soul trebuia udat imediat- ROSU
+     * pentru mai mult de 100 de valori de 0, plata este complet neglijata - GRI
+     * @param valoare
+     * valoarea citita din fisier: 0 sau 1
+     */
     public void setStatusValue(String valoare) {
     	
     	    if ("1".equals(valoare)) {
@@ -37,7 +51,7 @@ public class GradientLabel extends JLabel {
     	        if (countOne > 20) {
     	            colorStart = new Color(255, 193, 7); // galben
     	            colorEnd = new Color(255, 160, 0);
-    	            setText("Planta este supraudata (" + countOne + " citiri consecutive)");
+    	            setText("Planta este bine udata (" + countOne + " citiri consecutive)");
     	            
     	        } else {
     	            colorStart = new Color(0, 200, 83); // verde

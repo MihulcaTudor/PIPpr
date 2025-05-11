@@ -33,6 +33,9 @@ public class ImageLabel extends GradientLabel {
 	 * icon pentru JLabel: umiditatea solului scazuta
 	 */
 	ImageIcon icnsad;
+	
+	
+	
 	/**
 	 * Variabila pentru contorizarea valorilor de 0 - sol uscat - transmise
 	 */
