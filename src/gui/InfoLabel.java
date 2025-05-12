@@ -51,11 +51,11 @@ public class InfoLabel extends GradientLabel {
 	            setText("Poate e timpul pentru o noua planta :(");
 	        } else if (countZero > 20) {
 	          
-	            setText("Grabiti-va!");
+	            setText("Grabiti-va! Solul este uscat! ");
 	            
 	        } else {
 	          
-	            setText("Planta are nevoie de apa (" + countZero + " citiri consecutive)");
+	            setText("Solul este proaspat udat! :)");
 	            
 	        }
 

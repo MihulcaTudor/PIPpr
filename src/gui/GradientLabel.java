@@ -54,18 +54,18 @@ public class GradientLabel extends JLabel {
     	        if (countOne > 20 && countdead==0) {
     	            colorStart = new Color(255, 193, 7); // galben
     	            colorEnd = new Color(255, 160, 0);
-    	            setText("Planta este bine udata (" + countOne + " citiri consecutive)");
+    	            setText("Planta este bine udata");
     	            
     	        } else if (countOne<=20 && countdead==0) {
     	            colorStart = new Color(0, 200, 83); // verde
     	            colorEnd = new Color(0, 150, 136);
-    	            setText("Planta este bine udata (" + countOne + " citiri consecutive)");
+    	            setText("Planta este bine udata ");
     	            
     	        }
     	        else {
     	        	colorStart = new Color(97, 97, 97); // gri inchis
     	            colorEnd = new Color(33, 33, 33);
-    	            setText("Planta este moarta (" + countZero + " citiri consecutive)");
+    	            setText("Planta este moarta");
     	        	
     	        }
 
@@ -77,23 +77,23 @@ public class GradientLabel extends JLabel {
     	            colorStart = new Color(97, 97, 97); // gri inchis
     	            colorEnd = new Color(33, 33, 33);
     	            countdead=1;
-    	            setText("Planta este moarta (" + countZero + " citiri consecutive)");
+    	            setText("Planta este moarta ");
     	            
     	        } else if (countZero > 20 && countdead==0) {
     	            colorStart = new Color(244, 67, 54); // rosu
     	            colorEnd = new Color(183, 28, 28);
-    	            setText("Planta este uscata (" + countZero + " citiri consecutive)");
+    	            setText("Planta este uscata ");
     	            
     	        } else if(countZero<=20&&countdead==0){
     	            colorStart = new Color(255, 235, 59); // galben deschis
     	            colorEnd = new Color(255, 193, 7);
-    	            setText("Planta are nevoie de apa (" + countZero + " citiri consecutive)");
+    	            setText("Planta are nevoie de apa ");
     	            
     	        }
     	        else {
     	        	 colorStart = new Color(97, 97, 97); // gri inchis
      	            colorEnd = new Color(33, 33, 33);
-     	           setText("Planta este moarta (" + countZero + " citiri consecutive)");
+     	           setText("Planta este moarta ");
     	        }
 
     	    } else {

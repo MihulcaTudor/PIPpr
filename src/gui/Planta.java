@@ -54,6 +54,7 @@ public class Planta extends JFrame {
 	private JLabel mid;
 	private JLabel low;
 	GradientLabel statusLabel;
+	HealthBar healthbar;
 	ImageLabel imageLabel;
 	InfoLabel infolabel;
 	
@@ -155,9 +156,11 @@ public class Planta extends JFrame {
 		infolabel=new InfoLabel(null);
 		statusLabel = new GradientLabel("Planta este sanatoasa");
 		statusLabel.setBounds(150,400,525,70);
+		healthbar=new HealthBar(statusLabel);
 		meniuprincipal.add(statusLabel);
 		meniuprincipal.add(imageLabel);
 		meniuprincipal.add(infolabel);
+		meniuprincipal.add(healthbar);
 		
 		
 		
@@ -193,11 +196,13 @@ public class Planta extends JFrame {
 							        statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
+							        healthbar.updateProgress();
 							    } else if (valoare.equals("0")) {
 							        
 							        statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
+							        healthbar.updateProgress();
 							        
 							    }
 							}

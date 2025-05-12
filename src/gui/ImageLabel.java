@@ -35,7 +35,8 @@ public class ImageLabel extends GradientLabel {
 	 * icon pentru JLabel: umiditatea solului scazuta
 	 */
 	ImageIcon icnsad;
-	
+	ImageIcon icnmid;
+	ImageIcon icndead;
 	
 	
 	/**
@@ -52,16 +53,26 @@ public class ImageLabel extends GradientLabel {
 	  */
 	 public void initializarepoze()
 	    { 
-	    	ImageIcon sad=new ImageIcon("src/gui/images/sad.png");
+	    	ImageIcon sad=new ImageIcon("src/gui/images/sad.jpg");
 			Image imgsad = sad.getImage().getScaledInstance(
 				   getWidth(), getHeight(), Image.SCALE_SMOOTH);
 			 icnsad = new ImageIcon(imgsad);
 			
-			ImageIcon happy=new ImageIcon("src/gui/images/happy.png");
+			ImageIcon happy=new ImageIcon("src/gui/images/happy.jpg");
 			setOpaque(true);
 			Image imghappy = happy.getImage().getScaledInstance(
 					   getWidth(), getHeight(), Image.SCALE_SMOOTH);
 			 icnhappy = new ImageIcon(imghappy);
+			 ImageIcon mid=new ImageIcon("src/gui/images/mid.jpg");
+				setOpaque(true);
+				Image imgmid = mid.getImage().getScaledInstance(
+						   getWidth(), getHeight(), Image.SCALE_SMOOTH);
+			icnmid = new ImageIcon(imgmid);
+			 ImageIcon dead=new ImageIcon("src/gui/images/dead.jpg");
+				setOpaque(true);
+				Image imgdead = dead.getImage().getScaledInstance(
+						   getWidth(), getHeight(), Image.SCALE_SMOOTH);
+			icndead = new ImageIcon(imgdead);
 			
 			
 			
@@ -97,7 +108,7 @@ public class ImageLabel extends GradientLabel {
  	            repaint();
  	        }
  	        else {
- 	        	setIcon(icnsad);
+ 	        	setIcon(icndead);
  	        }
 
  	    } else if ("0".equals(valoare)) {
@@ -106,14 +117,14 @@ public class ImageLabel extends GradientLabel {
 
  	        if (countZero > 100) {
  	        	countdead=1;
- 	        	setIcon(icnsad);
+ 	        	setIcon(icndead);
  	        	repaint();
  	          
  	        } else if (countZero > 20 && countdead==0) {
  	            setIcon(icnsad);
  	            repaint();
  	        } else if (countZero<20&& countdead==0){
- 	            setIcon(icnhappy);
+ 	            setIcon(icnmid);
  	            repaint();
  	        }
  	        else {
