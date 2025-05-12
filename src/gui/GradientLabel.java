@@ -90,7 +90,9 @@ public class GradientLabel extends JLabel {
 
     	    repaint();
     	}
-    
+    /**
+     * Functie pentru colorarea gradienta a labelului
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();

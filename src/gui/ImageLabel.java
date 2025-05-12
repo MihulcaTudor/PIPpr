@@ -88,14 +88,10 @@ public class ImageLabel extends GradientLabel {
  	        countOne++;
  	        countZero = 0;
 
- 	        if (countOne > 20) {
- 	          
- 	            setIcon(icnsad);
- 	            repaint();
- 	        } else {
+ 	   
  	            setIcon(icnhappy);
  	            repaint();
- 	        }
+ 	        
 
  	    } else if ("0".equals(valoare)) {
  	        countZero++;
