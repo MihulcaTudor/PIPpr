@@ -20,17 +20,17 @@ public class Meniuprincipal extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//GradientLabel gradientLabel;
+	GradientLabel gradientLabel;
 
 	
-	public  Meniuprincipal()
+	public  Meniuprincipal(GradientLabel gradientLabel)
 	{
-		//this.gradientLabel=gradientLabel;
+		this.gradientLabel=gradientLabel;
 		this.setLayout(null);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(new Color(173,235,179));
 		
-		PlantInfoPannel infoPanel = new PlantInfoPannel();
+		PlantInfoPannel infoPanel = new PlantInfoPannel(gradientLabel);
 		infoPanel.setBounds(620, 80, 300, 300);
 		add(infoPanel);
 		infoPanel.setSensorConnected(true);

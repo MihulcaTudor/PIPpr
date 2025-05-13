@@ -30,10 +30,10 @@ public class PlantInfoPannel extends JPanel {
      String lastWateredDate = "-";
      boolean sensorConnected = false;
      Date date=new Date();
-     // GradientLabel gradientLabel;
+      GradientLabel gradientLabel;
 
-    public PlantInfoPannel() {
-    	//this.gradientLabel = gradientLabel;
+    public PlantInfoPannel(GradientLabel gradientLabel) {
+    	this.gradientLabel = gradientLabel;
         setLayout(null);
         setBackground(new Color(230, 255, 230));
         setBorder(BorderFactory.createTitledBorder(
@@ -84,13 +84,13 @@ public class PlantInfoPannel extends JPanel {
         
         add(changePlantButton);
     }
-//    public void setdate()
-//    {
-//    	if (gradientLabel.countZero==0&&gradientLabel.countOne==1)
-//    	{
-//    		date=new Date();
-//    	}
-//    }
+    public void setdate()
+    {
+    	if (gradientLabel.countZero==0 && gradientLabel.countOne==1)
+    	{
+    		date=new Date();
+    	}
+    }
 
     public void setSensorConnected(boolean connected) {
         sensorConnected = connected;
@@ -98,6 +98,7 @@ public class PlantInfoPannel extends JPanel {
     }
 
     public void setLastWateredNow() {
+    	setdate();
         SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         lastWateredDate = formatter.format(date);
         updateLabels();
@@ -107,7 +108,7 @@ public class PlantInfoPannel extends JPanel {
         sensorStatusLabel.setText("Senzor conectat: " + (sensorConnected ? "Da" : "Nu"));
         lastWateredLabel.setText("Ultima udare: " + lastWateredDate);
         plantTypeLabel.setText("Tip planta: " + plantType);
-       // repaint();
-       // revalidate();
+        repaint();
+        revalidate();
         }
 } 

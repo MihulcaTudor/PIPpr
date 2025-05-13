@@ -106,7 +106,8 @@ public class Planta extends JFrame {
 		
 		
 		Help help=new Help();
-		Meniuprincipal meniuprincipal=new Meniuprincipal();
+		statusLabel = new GradientLabel("Planta este sanatoasa");
+		Meniuprincipal meniuprincipal=new Meniuprincipal(statusLabel);
 		
 		contentPane.add(meniuprincipal,"MainMenu");
 		contentPane.add(help,"Help");
@@ -154,7 +155,7 @@ public class Planta extends JFrame {
 
 		imageLabel=new ImageLabel(null);
 		infolabel=new InfoLabel(null);
-		statusLabel = new GradientLabel("Planta este sanatoasa");
+		
 		statusLabel.setBounds(150,400,525,70);
 		healthbar=new HealthBar(statusLabel);
 		meniuprincipal.add(statusLabel);
