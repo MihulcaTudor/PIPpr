@@ -57,7 +57,9 @@ public class Planta extends JFrame {
 	HealthBar healthbar;
 	ImageLabel imageLabel;
 	InfoLabel infolabel;
-	
+	PlantInfoPannel infoPanel;
+	DateLabel datelabel;
+	private String ultimaValoareLogica = "0";
 	
 
 	protected String ultimaValoare;
@@ -107,7 +109,7 @@ public class Planta extends JFrame {
 		
 		Help help=new Help();
 		statusLabel = new GradientLabel("Planta este sanatoasa");
-		Meniuprincipal meniuprincipal=new Meniuprincipal(statusLabel);
+		Meniuprincipal meniuprincipal=new Meniuprincipal();
 		
 		contentPane.add(meniuprincipal,"MainMenu");
 		contentPane.add(help,"Help");
@@ -158,6 +160,15 @@ public class Planta extends JFrame {
 		
 		statusLabel.setBounds(150,400,525,70);
 		healthbar=new HealthBar(statusLabel);
+		
+		datelabel=new DateLabel(" ");
+		
+	    infoPanel = new PlantInfoPannel(datelabel);
+		infoPanel.setBounds(620, 80, 300, 300);
+		infoPanel.setSensorConnected(true);
+		infoPanel.setLastWatered();
+		
+		meniuprincipal.add(infoPanel);
 		meniuprincipal.add(statusLabel);
 		meniuprincipal.add(imageLabel);
 		meniuprincipal.add(infolabel);
@@ -193,12 +204,24 @@ public class Planta extends JFrame {
 							if (valoare != null) {
 								//deci compara valoarea citita cu cea anterioara si numara de cate ori a fost consecutiv
 							    ultimaValoare = valoare;
+							    
+//		                            // Verifica daca este o tranzitie 0 -> 1
+//		                            if (ultimaValoareLogica.equals("0") && valoare.equals("1")) {
+//		                                infoPanel.lastWateredLabel.setStatusValue("1"); // va face date=new Date()
+//		                                infoPanel.setLastWatered(); // actualizeaza labelul cu text formatat
+//		                            }
+//
+//		                            ultimaValoareLogica = valoare;
 
 							    if (valoare.equals("1")) {
 							       
 							        statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
+							        
+							        revalidate();
+							        repaint();
+							        
 							        healthbar.updateProgress();
 							    } else if (valoare.equals("0")) {
 							        

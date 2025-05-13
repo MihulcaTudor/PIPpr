@@ -26,20 +26,25 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 public class Help extends JPanel{
-	
+	/**
+	 * Creeaza un obiect de tip Jpanel ce contine: un panel cu scrollbar in care se gasesc informatii despre proiect si un  panel cu trei iconuri ce contin fiecare informatii despre ce este in imagini.
+	 * informatiile apar atunci cand mouse ul da hover peste imagine. acestea sunt incluse intr un alt panel cu chenar si titlu
+	 */
 	 public Help()
 	 {
 		 setLayout(null);
 	        setBackground(new Color(220, 255, 220)); // Verde pastelat
 
-	        // Titlu
+	        /**
+	         *  Titlu
+	         */
 	        JLabel title = new JLabel("Ghid de utilizare");
 	        title.setFont(new Font("Segoe UI", Font.BOLD, 22));
 	        title.setHorizontalAlignment(SwingConstants.CENTER);
 	        title.setBounds(100, 10, 400, 30); // Centrat orizontal
 	        add(title);
 
-	        // Zona de text
+	       
 	        JTextArea infoArea = new JTextArea();
 	        infoArea.setText(
 	        		"Bine ai venit in aplicatia MyPlant - asistentul tau digital pentru ingrijirea plantelor de apartament!\n\n" +
@@ -118,7 +123,7 @@ public class Help extends JPanel{
 	        tooltipWindow.pack();
 	        tooltipWindow.setAlwaysOnTop(true);	        
 
-	        // 3. Mouse listener pentru hover logic
+	       
 	        raspberryLabel.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseEntered(MouseEvent e) {

@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+/**
+ */
 import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -10,7 +12,11 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
+/**
+ * 
+ * @author AIDA
+ *clasa pentru un label cu culori in degrade si colturi rotunjite
+ */
 public class GradientLabel extends JLabel {
 	 protected Color colorStart = Color.LIGHT_GRAY;
 	 protected Color colorEnd = Color.DARK_GRAY;

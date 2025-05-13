@@ -10,15 +10,27 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
 
-public class CircleButton extends JButton{		//clasa pentru buton rotund
+public class CircleButton extends JButton{		
 
 	/**
+	 * Buton rotund
 * 
 */
 private static final long serialVersionUID = 1L;
+/**
+ * variabila care indica cand mouse ul este hover peste buton
+ */
 	private boolean mouseOver = false;
+	/**
+	 * variabila care indica daca mouse ul apasa pe buton
+	 */
 	private boolean mousePressed = false;
 
+	/**
+	 * Counstructor pentru butonul rotund ce contine un ascultator de tip Mouse Adapter pentru a-si schimba culoarea in functie de apasare
+	 * @param text
+	 * ce scrie pe buton
+	 */
 	public CircleButton(String text){
 		super(text);
 		setOpaque(false);
@@ -61,7 +73,11 @@ private static final long serialVersionUID = 1L;
 		addMouseMotionListener(mouseListener);		
 	}
 	
-
+/**
+ * functie ce returneaza diametrul butonului rotund
+ * @return
+ * diametru
+ */
 	private int getDiameter(){
 		int diameter = Math.min(getWidth(), getHeight());
 		return diameter;
@@ -79,7 +95,9 @@ private static final long serialVersionUID = 1L;
 		int radius = getDiameter()/2;
 		return Point2D.distance(x, y, getWidth()/2, getHeight()/2) < radius;
 	}
-
+/**
+ * functie ce are rol de a colora butonul in functie de pozitia si actiunea mouse ului
+ */
 	@Override
 	public void paintComponent(Graphics g){
 

@@ -14,7 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
-
+/**
+ * 
+ * @author AIDUL
+ *
+ *clasa pentru imagine care afiseaja un mesaj atunci cand este dat hover cu mouse ul pe deasupra. 
+ *clasa nu a fost folosita in proiect incat nu se afisa corespunzator, obiectele au fost create individual
+ */
 public class HoverImage extends JPanel{
 	JWindow tooltipWindow;
 	JLabel tooltipLabel;
@@ -44,7 +50,7 @@ public class HoverImage extends JPanel{
      tooltipWindow.setAlwaysOnTop(true);
      
 
-     // 3. Mouse listener pentru hover logic
+    
      imgLabel.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseEntered(MouseEvent e) {

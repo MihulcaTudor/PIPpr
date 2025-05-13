@@ -21,19 +21,22 @@ public class PlantInfoPannel extends JPanel {
      /**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	//private static final LayoutManager FlowLayout = null;
 	JLabel sensorStatusLabel;
-     JLabel lastWateredLabel;
+     DateLabel lastWateredLabel;
      JLabel plantTypeLabel;
+     JLabel messageLabel;
      String plantType = "Nespecificat";
      String lastWateredDate = "-";
      boolean sensorConnected = false;
-     Date date=new Date();
-      GradientLabel gradientLabel;
+    
+     // GradientLabel gradientLabel;
 
-    public PlantInfoPannel(GradientLabel gradientLabel) {
-    	this.gradientLabel = gradientLabel;
+    public PlantInfoPannel(DateLabel lastWateredLabel) {
+    	this.lastWateredLabel=lastWateredLabel;
+    	//this.gradientLabel = gradientLabel;
         setLayout(null);
         setBackground(new Color(230, 255, 230));
         setBorder(BorderFactory.createTitledBorder(
@@ -43,13 +46,20 @@ public class PlantInfoPannel extends JPanel {
                 TitledBorder.TOP,
                 new Font("Arial", Font.BOLD, 14)
         ));
+        
+        messageLabel= new JLabel("Nu uita sa pui planta intr un loc luminos!");
+        messageLabel.setBounds(10, 50, 250, 150);
+        messageLabel.setVisible(true);
 
         sensorStatusLabel = new JLabel("Senzor conectat: Nu");
         sensorStatusLabel.setBounds(10, 10, 200, 100);
         sensorStatusLabel.setVisible(true);
-        lastWateredLabel = new JLabel("Ultima udare: -");
-        lastWateredLabel.setBounds(10, 50, 200, 150);
-        lastWateredLabel.setVisible(true);
+        
+        
+//        lastWateredLabel.setBounds(10, 50, 200, 150);
+//        lastWateredLabel.setVisible(true);
+        
+        
         plantTypeLabel = new JLabel("Tip planta: " + plantType);
         plantTypeLabel.setBounds(10, 100, 200, 200);
         plantTypeLabel.setVisible(true);
@@ -78,28 +88,23 @@ public class PlantInfoPannel extends JPanel {
         repaint();
         revalidate();
         
-        add(lastWateredLabel);
+       // add(lastWateredLabel);
        
+        add(messageLabel);
         add(plantTypeLabel);
         
         add(changePlantButton);
     }
-    public void setdate()
-    {
-    	if (gradientLabel.countZero==0 && gradientLabel.countOne==1)
-    	{
-    		date=new Date();
-    	}
-    }
+    
 
     public void setSensorConnected(boolean connected) {
         sensorConnected = connected;
         sensorStatusLabel.setText("Senzor conectat: " + (connected ? "Da" : "Nu"));
     }
 
-    public void setLastWateredNow() {
-    	setdate();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    public void setLastWatered() {
+    	Date date=lastWateredLabel.getdate();
+    	SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
         lastWateredDate = formatter.format(date);
         updateLabels();
     }

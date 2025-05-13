@@ -1,10 +1,16 @@
 package gui;
 
 import java.awt.Color;
+
+ 
 import java.awt.Font;
 
 import javax.swing.SwingConstants;
-
+/**
+ * clasa pentru un label ce afiseaza un mesaj. mosteneste clasa gradientlabel pentru ca ii foloseste metodele
+ * @author AIDA
+ *
+ */
 public class InfoLabel extends GradientLabel {
 
 	/**
