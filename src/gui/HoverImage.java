@@ -1,37 +1,73 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 
-public class HoverImage {
-    public static void main(String[] args) {
+public class HoverImage extends JPanel{
+	JWindow tooltipWindow;
+	JLabel tooltipLabel;
+	JLabel imgLabel;
+	public HoverImage(String path, String text)
+	{
+		imgLabel = new JLabel();
+		imgLabel.setBounds(650, 150, 120, 120);
+		ImageIcon icon = new ImageIcon(path);
+		Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+		imgLabel.setIcon(new ImageIcon(img));
+     
+   
+
+     tooltipWindow = new JWindow();
+     tooltipLabel = new JLabel(text);
+     tooltipLabel.setBackground(new Color(255, 255, 210));
+     tooltipLabel.setOpaque(true);
+     tooltipLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+     tooltipWindow.getContentPane().add(tooltipLabel);
+     tooltipWindow.pack();
+     tooltipWindow.setAlwaysOnTop(true);
      
 
-        
-        JPanel panel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                ImageIcon icon = new ImageIcon("src/gui/images/happy.jpg"); 
-                g.drawImage(icon.getImage(), 50, 50, null);
-            }
-        };
+     // 3. Mouse listener pentru hover logic
+     imgLabel.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseEntered(MouseEvent e) {
+         	if (imgLabel != null  && tooltipWindow != null) 
+         	{
+             Point location = imgLabel.getLocationOnScreen();
+             tooltipWindow.setLocation(location.x + imgLabel.getWidth(), location.y);
+             tooltipWindow.setVisible(true);
+             
+         	}else {
+         	    System.out.println("imgLabel sau tooltipWindow este null");
+         	}
+         }
+         
 
-        
-        panel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                
-                JOptionPane.showMessageDialog(panel, "Aceasta este descrierea obiectului.");
-            }
-        });
+         @Override
+         public void mouseExited(MouseEvent e) {
+             tooltipWindow.setVisible(false);
+         }
+     });
 
-       
-    }
+
+}
+public void setPlace(int x,int y,int w,int l) {
+	
+	imgLabel.setBounds(x,y,w,l);
+	Point location = imgLabel.getLocationOnScreen();
+	tooltipWindow.setLocation(location.x + imgLabel.getWidth(), location.y);
+	
+}
 }

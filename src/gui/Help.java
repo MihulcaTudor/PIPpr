@@ -3,21 +3,28 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Timer;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 public class Help extends JPanel{
-	JLabel lbHelp=new JLabel();
-	
 	
 	 public Help()
 	 {
@@ -63,5 +70,51 @@ public class Help extends JPanel{
 	        scrollPane.setOpaque(false);
 	        scrollPane.getViewport().setOpaque(false);
 	        add(scrollPane);
-	 }
+	        
+//	       String path="src/gui/images/raspberry.jpeg";
+//	       String text="<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>";
+//	        HoverImage raspberry=new HoverImage(path,text);
+//	        add(raspberry);
+//	        raspberry.setVisible(true);
+//	        raspberry.setPlace(650, 150, 120, 120);
+	        
+        JLabel raspberryLabel = new JLabel();
+	        raspberryLabel.setBounds(650, 150, 120, 120);
+	        ImageIcon icon = new ImageIcon("src/gui/images/raspberry.jpeg");
+	        Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+	        raspberryLabel.setIcon(new ImageIcon(img));
+	        
+	        this.add(raspberryLabel);
+
+	        JWindow tooltipWindow = new JWindow();
+	        JLabel tooltipLabel = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
+	        tooltipLabel.setBackground(new Color(255, 255, 210));
+	        tooltipLabel.setOpaque(true);
+	        tooltipLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+	        tooltipWindow.getContentPane().add(tooltipLabel);
+	        tooltipWindow.pack();
+	        tooltipWindow.setAlwaysOnTop(true);	        
+
+	        // 3. Mouse listener pentru hover logic
+	        raspberryLabel.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	            	if (raspberryLabel != null  && tooltipWindow != null) 
+	            	{
+	                Point location = raspberryLabel.getLocationOnScreen();
+	                tooltipWindow.setLocation(location.x + raspberryLabel.getWidth(), location.y);
+	                tooltipWindow.setVisible(true);
+	                
+	            	}else {
+	            	    System.out.println("raspberryLabel sau tooltipWindow este null");
+	            	}
+	            }
+	            
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                tooltipWindow.setVisible(false);
+	            }	        });
+	
+	 	}
 	 }
