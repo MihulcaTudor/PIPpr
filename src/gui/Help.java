@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 public class Help extends JPanel{
 	
@@ -71,12 +72,34 @@ public class Help extends JPanel{
 	        scrollPane.getViewport().setOpaque(false);
 	        add(scrollPane);
 	        
+	        JPanel hardwarePanel = new JPanel();
+	        //hardwarePanel.setLayout(null); 
+	        hardwarePanel.setBorder(BorderFactory.createTitledBorder(
+	                BorderFactory.createLineBorder(Color.GRAY),
+	                "Componente hardware",
+	                TitledBorder.CENTER,
+	                TitledBorder.TOP,
+	                new Font("Arial", Font.BOLD, 16)
+	        ));
+	        hardwarePanel.setBackground(new Color(230, 255, 230));
+	        hardwarePanel.setBounds(570, 50, 350, 400);
+	        add(hardwarePanel);
+	        
+	        
+//	        String path = "src/gui/Images/raspberry.jpeg";
+//	        String text = "<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>";
+
+//	        HoverImage raspberry = new HoverImage(path, text);
+//	       // raspberry.setBounds(650, 150, 120, 120); 
+//	       // raspberry.setPlace(650, 150, 120, 120);
+//	        add(raspberry);
+	        
 //	       String path="src/gui/images/raspberry.jpeg";
 //	       String text="<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>";
 //	        HoverImage raspberry=new HoverImage(path,text);
 //	        add(raspberry);
 //	        raspberry.setVisible(true);
-//	        raspberry.setPlace(650, 150, 120, 120);
+	//        raspberry.setPlace(650, 150, 120, 120);
 	        
         JLabel raspberryLabel = new JLabel();
 	        raspberryLabel.setBounds(650, 150, 120, 120);
@@ -84,7 +107,7 @@ public class Help extends JPanel{
 	        Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 	        raspberryLabel.setIcon(new ImageIcon(img));
 	        
-	        this.add(raspberryLabel);
+	        hardwarePanel.add(raspberryLabel);
 
 	        JWindow tooltipWindow = new JWindow();
 	        JLabel tooltipLabel = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
@@ -102,19 +125,96 @@ public class Help extends JPanel{
 	            	if (raspberryLabel != null  && tooltipWindow != null) 
 	            	{
 	                Point location = raspberryLabel.getLocationOnScreen();
-	                tooltipWindow.setLocation(location.x + raspberryLabel.getWidth(), location.y);
+	        		tooltipWindow.setLocation(location.x + raspberryLabel.getWidth(), location.y);
 	                tooltipWindow.setVisible(true);
 	                
 	            	}else {
 	            	    System.out.println("raspberryLabel sau tooltipWindow este null");
 	            	}
 	            }
-	            
+            
 
 	            @Override
 	            public void mouseExited(MouseEvent e) {
 	                tooltipWindow.setVisible(false);
 	            }	        });
+	        
+	        JLabel sensorLabel = new JLabel();
+	        sensorLabel.setBounds(800, 150, 120, 120);
+	        ImageIcon icons = new ImageIcon("src/gui/images/sensor.jpg");
+	        Image imgs = icons.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+	        sensorLabel.setIcon(new ImageIcon(imgs));
+	        
+	        hardwarePanel.add(sensorLabel);
+
+	        JWindow tooltipWindows = new JWindow();
+	        JLabel tooltipLabels = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
+	        tooltipLabels.setBackground(new Color(255, 255, 210));
+	        tooltipLabels.setOpaque(true);
+	        tooltipLabels.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+	        tooltipWindows.getContentPane().add(tooltipLabels);
+	        tooltipWindows.pack();
+	        tooltipWindows.setAlwaysOnTop(true);	        
+
+	        // 3. Mouse listener pentru hover logic
+	        sensorLabel.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	            	if (sensorLabel != null  && tooltipWindows != null) 
+	            	{
+	                Point location = sensorLabel.getLocationOnScreen();
+	        		tooltipWindows.setLocation(location.x + sensorLabel.getWidth(), location.y);
+	                tooltipWindows.setVisible(true);
+	                
+	            	}else {
+	            	    System.out.println("sensorLabel sau tooltipWindows este null");
+	            	}
+	            }
+            
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                tooltipWindows.setVisible(false);
+	            }	        });
+	        
+	        JLabel lcdLabel = new JLabel();
+	        lcdLabel.setBounds(725, 300, 120, 120);
+	        ImageIcon iconl = new ImageIcon("src/gui/images/lcd.jpg");
+	        Image imgl = iconl.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+	        lcdLabel.setIcon(new ImageIcon(imgl));
+	        
+	        hardwarePanel.add(lcdLabel);
+
+	        JWindow tooltipWindowl = new JWindow();
+	        JLabel tooltipLabell = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
+	        tooltipLabell.setBackground(new Color(255, 255, 210));
+	        tooltipLabell.setOpaque(true);
+	        tooltipLabell.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+	        tooltipWindowl.getContentPane().add(tooltipLabell);
+	        tooltipWindowl.pack();
+	        tooltipWindowl.setAlwaysOnTop(true);	        
+
+	        // 3. Mouse listener pentru hover logic
+	        lcdLabel.addMouseListener(new MouseAdapter() {
+	            @Override
+	            public void mouseEntered(MouseEvent e) {
+	            	if (lcdLabel != null  && tooltipWindowl != null) 
+	            	{
+	                Point location = lcdLabel.getLocationOnScreen();
+	        		tooltipWindowl.setLocation(location.x + lcdLabel.getWidth(), location.y);
+	                tooltipWindowl.setVisible(true);
+	                
+	            	}else {
+	            	    System.out.println("lcdLabel sau tooltipWindowl este null");
+	            	}
+	            }
+            
+
+	            @Override
+	            public void mouseExited(MouseEvent e) {
+	                tooltipWindowl.setVisible(false);
+	            }	        });
+	        
 	
 	 	}
 	 }

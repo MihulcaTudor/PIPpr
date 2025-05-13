@@ -16,14 +16,25 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class Meniuprincipal extends JPanel{
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//GradientLabel gradientLabel;
 
 	
 	public  Meniuprincipal()
 	{
+		//this.gradientLabel=gradientLabel;
 		this.setLayout(null);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(new Color(173,235,179));
+		
+		PlantInfoPannel infoPanel = new PlantInfoPannel();
+		infoPanel.setBounds(620, 80, 300, 300);
+		add(infoPanel);
+		infoPanel.setSensorConnected(true);
+		infoPanel.setLastWateredNow();
 	
 		
 	}

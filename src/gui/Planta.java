@@ -165,6 +165,8 @@ public class Planta extends JFrame {
 		
 		
 		
+		
+		
 		startMonitoring(); // functia defiita mai jos
 		
 		

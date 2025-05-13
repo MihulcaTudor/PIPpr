@@ -21,11 +21,16 @@ public class HoverImage extends JPanel{
 	JLabel imgLabel;
 	public HoverImage(String path, String text)
 	{
+		setLayout(null);
+        setOpaque(false); 
+		
 		imgLabel = new JLabel();
 		imgLabel.setBounds(650, 150, 120, 120);
 		ImageIcon icon = new ImageIcon(path);
 		Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
 		imgLabel.setIcon(new ImageIcon(img));
+		
+		add(imgLabel);
      
    
 
