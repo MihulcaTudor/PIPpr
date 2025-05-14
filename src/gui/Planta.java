@@ -19,6 +19,7 @@ import java.awt.geom.Point2D;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +58,7 @@ public class Planta extends JFrame {
 	
 	
 
-	protected String ultimaValoare;
+	protected String ultimaValoare="";
 
 	
 
@@ -132,6 +133,7 @@ public class Planta extends JFrame {
 		
 		JButton btnRefresh=new JButton("Refresh") ;
 		btnRefresh.setBounds(100, 10, 85, 21);
+		btnRefresh.setBackground(new Color(170,220,190));
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
@@ -155,7 +157,7 @@ public class Planta extends JFrame {
 		statusLabel.setBounds(150,400,525,70);
 		healthbar=new HealthBar(statusLabel);
 		
-		DateLabel dateLabel = new DateLabel("Ultima udare: -");
+		DateLabel dateLabel = new DateLabel(" ");
 
 		
 	    infoPanel = new PlantInfoPannel(dateLabel);
@@ -186,39 +188,47 @@ public class Planta extends JFrame {
             public void run() {
                 while (true) {
                 	//bucla infinita 
+                	
                     try {
-                        try (BufferedReader reader = new BufferedReader(new FileReader("src\\gui\\umiditate.txt"))) {
+                    	try (BufferedReader reader = new BufferedReader(new FileReader("src\\gui\\umiditate.txt"))) {
 							String valoare = null;
 							String linie;
 
 							while ((linie = reader.readLine()) != null) {
-							    valoare = linie; // pastreaza ultima linie citita
-							}
+								 {
+								            valoare = linie; 						
+								  }
+								 if (valoare!=null) {
+							//deci compara valoarea citita cu cea anterioara si numara de cate ori a fost consecutiv
+							ultimaValoare = valoare;
+							System.out.println("Valoare citita: " + valoare);  // DEBUG
+							
+							
 
-							if (valoare != null) {
-								//deci compara valoarea citita cu cea anterioara si numara de cate ori a fost consecutiv
-							    ultimaValoare = valoare;
-							    
+							if (valoare.equals("1")) {
 
-							    if (valoare.equals("1")) {
-							       
-							        statusLabel.setStatusValue(valoare);
+							    statusLabel.setStatusValue(valoare);
+							    imageLabel.setStatusValue(valoare);
+							    infolabel.setStatusValue(valoare);
+							    infoPanel.getDateLabel().setStatusValue(valoare);
+							    healthbar.updateProgress();
+
+							} 
+							else if (valoare.equals("0"))
+							{
+								    statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
 							        infoPanel.getDateLabel().setStatusValue(valoare);
 							        healthbar.updateProgress();
-							    } else if (valoare.equals("0")) {
-							        
-							        statusLabel.setStatusValue(valoare);
-							        imageLabel.setStatusValue(valoare);
-							        infolabel.setStatusValue(valoare);
-							        infoPanel.getDateLabel().setStatusValue(valoare);
-							        healthbar.updateProgress();
-							        
-							    }
 							}
+							else {
+								System.out.println("Valoare invalida: " + valoare);
+								}
+							}
+								 }
 						}
-                        Thread.sleep(500); //citeste de doua ori pe min
+                        Thread.sleep(800); //citeste de doua ori pe min
                     } catch (Exception e) {
                         System.err.println("Eroare: " + e.getMessage());
                     }

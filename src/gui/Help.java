@@ -78,7 +78,7 @@ public class Help extends JPanel{
 	        add(scrollPane);
 	        
 	        JPanel hardwarePanel = new JPanel();
-	        //hardwarePanel.setLayout(null); 
+	        hardwarePanel.setOpaque(false); 
 	        hardwarePanel.setBorder(BorderFactory.createTitledBorder(
 	                BorderFactory.createLineBorder(Color.GRAY),
 	                "Componente hardware",
@@ -91,22 +91,7 @@ public class Help extends JPanel{
 	        add(hardwarePanel);
 	        
 	        
-//	        String path = "src/gui/Images/raspberry.jpeg";
-//	        String text = "<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>";
-
-//	        HoverImage raspberry = new HoverImage(path, text);
-//	       // raspberry.setBounds(650, 150, 120, 120); 
-//	       // raspberry.setPlace(650, 150, 120, 120);
-//	        add(raspberry);
-	        
-//	       String path="src/gui/images/raspberry.jpeg";
-//	       String text="<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>";
-//	        HoverImage raspberry=new HoverImage(path,text);
-//	        add(raspberry);
-//	        raspberry.setVisible(true);
-	//        raspberry.setPlace(650, 150, 120, 120);
-	        
-        JLabel raspberryLabel = new JLabel();
+	        JLabel raspberryLabel = new JLabel();
 	        raspberryLabel.setBounds(650, 150, 120, 120);
 	        ImageIcon icon = new ImageIcon("src/gui/images/raspberry.jpeg");
 	        Image img = icon.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
@@ -153,7 +138,7 @@ public class Help extends JPanel{
 	        hardwarePanel.add(sensorLabel);
 
 	        JWindow tooltipWindows = new JWindow();
-	        JLabel tooltipLabels = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
+	        JLabel tooltipLabels = new JLabel("<html><b>Senzor de umiditate</b><br> Trimite date digitale catre<br> Microcontroller<br> spre a fi citite</html>");
 	        tooltipLabels.setBackground(new Color(255, 255, 210));
 	        tooltipLabels.setOpaque(true);
 	        tooltipLabels.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -191,7 +176,7 @@ public class Help extends JPanel{
 	        hardwarePanel.add(lcdLabel);
 
 	        JWindow tooltipWindowl = new JWindow();
-	        JLabel tooltipLabell = new JLabel("<html><b>Raspberry Pi Zero</b><br>- Microcontroller compact<br>- Consum redus<br>- Ideal pentru senzori</html>");
+	        JLabel tooltipLabell = new JLabel("<html><b>Ecran LCD </b><br> pentru semnale luminoase<br> in functie de starea plantei</html>");
 	        tooltipLabell.setBackground(new Color(255, 255, 210));
 	        tooltipLabell.setOpaque(true);
 	        tooltipLabell.setBorder(BorderFactory.createLineBorder(Color.GRAY));
@@ -219,6 +204,14 @@ public class Help extends JPanel{
 	            public void mouseExited(MouseEvent e) {
 	                tooltipWindowl.setVisible(false);
 	            }	        });
+	        
+	        JLabel iarba = new JLabel();
+	        iarba.setBounds(0, 300, 1000, 300);
+	        ImageIcon iconiarba = new ImageIcon("src/gui/images/iarba.png");
+	        Image imgiarba = iconiarba.getImage();//.getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+	        iarba.setIcon(new ImageIcon(imgiarba));
+	        add(iarba);
+	        iarba.setVisible(true);
 	        
 	
 	 	}

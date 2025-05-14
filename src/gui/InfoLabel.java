@@ -43,6 +43,7 @@ public class InfoLabel extends GradientLabel {
 	            setText("Atentie! Ati inecat planta! Mai putina apa data viitoare :)");
 	            
 	        } else {
+	        	setText("Bine ati venit in aplicatia MyPlant");
 	          
 	            
 	            
