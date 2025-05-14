@@ -26,7 +26,7 @@ public class Meniuprincipal extends JPanel{
 	
 	public  Meniuprincipal()
 	{
-		//this.gradientLabel=gradientLabel;
+		
 		this.setLayout(null);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(new Color(173,235,179));

@@ -4,24 +4,33 @@ import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateLabel extends GradientLabel {
-	protected Date date=new Date();
+import javax.swing.JLabel;
+
+public class DateLabel extends JLabel  {
+	protected Date ultimaUdare;
+	private int countZero=0;
+	private int countOne=0;
 	
 	public DateLabel(String text) {
-		super(text);
-		// TODO Auto-generated constructor stub
+		
 		setOpaque(false);
+		setForeground(Color.BLACK);
+		setText(text);
 		
 	}
 	
-	public Date getdate() {
-		return date;
-		
-	}
 	 public void setStatusValue(String valoare) {
 	    	
  	    if ("1".equals(valoare)) {
  	        countOne++;
+ 	        if (countZero>0 && countOne ==1)
+ 	        {
+ 	        	ultimaUdare= new Date();
+ 	        	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                setText("Ultima udare: " + sdf.format(ultimaUdare));
+                repaint();
+                revalidate();
+ 	        }
  	        countZero = 0;
  	        
  	    
@@ -30,20 +39,15 @@ public class DateLabel extends GradientLabel {
  	        countZero++;
  	        countOne = 0;
 
- 	    } else {
- 	        countZero = 0;
- 	        countOne = 0;
- 	        
- 	    }
- 	    if (countZero==0 && countOne==1)
- 	    {
- 	    	date=new Date();
- 	    	 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
- 	         String text = "Last watered: " + sdf.format(date);
- 	         this.setText(text);
- 	    }
+ 	    } 
+ 	    System.out.println("setStatusValue apelat cu: " + valoare);
+ 	  
 
  	    repaint();
  	}
+	 public Date getUltimaUdare() {
+		 return ultimaUdare;
+	 }
 
+	 
 }

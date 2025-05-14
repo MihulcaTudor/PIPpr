@@ -49,17 +49,12 @@ public class Planta extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private CardLayout cardlayout;
 	private JPanel contentPane;
-	//private JPanel help;
-	private JLabel high;
-	private JLabel mid;
-	private JLabel low;
 	GradientLabel statusLabel;
 	HealthBar healthbar;
 	ImageLabel imageLabel;
 	InfoLabel infolabel;
 	PlantInfoPannel infoPanel;
-	DateLabel datelabel;
-	private String ultimaValoareLogica = "0";
+	
 	
 
 	protected String ultimaValoare;
@@ -108,7 +103,6 @@ public class Planta extends JFrame {
 		
 		
 		Help help=new Help();
-		statusLabel = new GradientLabel("Planta este sanatoasa");
 		Meniuprincipal meniuprincipal=new Meniuprincipal();
 		
 		contentPane.add(meniuprincipal,"MainMenu");
@@ -157,16 +151,17 @@ public class Planta extends JFrame {
 
 		imageLabel=new ImageLabel(null);
 		infolabel=new InfoLabel(null);
-		
+		statusLabel = new GradientLabel("Planta este sanatoasa");
 		statusLabel.setBounds(150,400,525,70);
 		healthbar=new HealthBar(statusLabel);
 		
-		datelabel=new DateLabel(" ");
+		DateLabel dateLabel = new DateLabel("Ultima udare: -");
+
 		
-	    infoPanel = new PlantInfoPannel(datelabel);
+	    infoPanel = new PlantInfoPannel(dateLabel);
 		infoPanel.setBounds(620, 80, 300, 300);
 		infoPanel.setSensorConnected(true);
-		infoPanel.setLastWatered();
+		
 		
 		meniuprincipal.add(infoPanel);
 		meniuprincipal.add(statusLabel);
@@ -199,35 +194,25 @@ public class Planta extends JFrame {
 							while ((linie = reader.readLine()) != null) {
 							    valoare = linie; // pastreaza ultima linie citita
 							}
-							//cititor din fisier cu pathul de la mmn din calculator, am incercat si cu pathul de la package explorer dat nu e bun
 
 							if (valoare != null) {
 								//deci compara valoarea citita cu cea anterioara si numara de cate ori a fost consecutiv
 							    ultimaValoare = valoare;
 							    
-//		                            // Verifica daca este o tranzitie 0 -> 1
-//		                            if (ultimaValoareLogica.equals("0") && valoare.equals("1")) {
-//		                                infoPanel.lastWateredLabel.setStatusValue("1"); // va face date=new Date()
-//		                                infoPanel.setLastWatered(); // actualizeaza labelul cu text formatat
-//		                            }
-//
-//		                            ultimaValoareLogica = valoare;
 
 							    if (valoare.equals("1")) {
 							       
 							        statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
-							        
-							        revalidate();
-							        repaint();
-							        
+							        infoPanel.getDateLabel().setStatusValue(valoare);
 							        healthbar.updateProgress();
 							    } else if (valoare.equals("0")) {
 							        
 							        statusLabel.setStatusValue(valoare);
 							        imageLabel.setStatusValue(valoare);
 							        infolabel.setStatusValue(valoare);
+							        infoPanel.getDateLabel().setStatusValue(valoare);
 							        healthbar.updateProgress();
 							        
 							    }

@@ -199,7 +199,7 @@ public class Help extends JPanel{
 	        tooltipWindowl.pack();
 	        tooltipWindowl.setAlwaysOnTop(true);	        
 
-	        // 3. Mouse listener pentru hover logic
+	        
 	        lcdLabel.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseEntered(MouseEvent e) {
