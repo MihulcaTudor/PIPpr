@@ -18,7 +18,7 @@ public class InfoLabel extends GradientLabel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public InfoLabel(String text) {
+	public InfoLabel(String text,GradientLabel source) {
 		
 		super(text);
 		setBounds(600,10,400,40);
@@ -30,6 +30,9 @@ public class InfoLabel extends GradientLabel {
 	    setVerticalAlignment(SwingConstants.CENTER);
 	    colorStart=Color.ORANGE;
 	    colorEnd=Color.GREEN;
+	    this.countZero = source.getCountZero();
+	    this.countOne = source.getCountOne();
+	    this.countdead=source.getCountdead();
 		// TODO Auto-generated constructor stub
 	}
 	

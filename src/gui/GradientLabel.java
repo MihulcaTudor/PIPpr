@@ -8,6 +8,12 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -38,7 +44,60 @@ public class GradientLabel extends JLabel {
         setFont(new Font("Arial", Font.BOLD, 16));
         setHorizontalAlignment(SwingConstants.CENTER);
         setVerticalAlignment(SwingConstants.CENTER);
+        loadCounters();
     }
+    
+    public int getCountZero() {
+    	return countZero;
+    }
+    public int getCountOne() {
+    	return countOne;
+    }
+    public int getCountdead() {
+    	return countdead;
+    }
+    public void setCountZero(int countZero) {
+    	this.countZero=countZero;
+    }
+    public void setCountOne(int countOne) {
+    	this.countOne=countOne;
+    }
+    public void setCountDead(int countdead)
+    {
+    	this.countdead=countdead;
+    }
+    public void saveCounters() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\gui\\counters.txt"));
+            writer.write(countZero + "\n");
+            writer.write(countOne + "\n");
+            writer.write(countdead+"\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void loadCounters() {
+        File file = new File("src\\gui\\counters.txt");
+        if (!file.exists()) {
+            return;
+        }
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String zeroLine = reader.readLine();
+            String oneLine = reader.readLine();
+            String deadLine=reader.readLine();
+            if (zeroLine != null && oneLine != null&&deadLine!=null) {
+                countZero = Integer.parseInt(zeroLine);
+                countOne = Integer.parseInt(oneLine);
+                countdead=Integer.parseInt(deadLine);
+            }
+            reader.close();
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Functie pentru afisarea textului respectiv nivelului de umiditate: pentru valori de 1, solul este OK, textul afisat corespunzator.-VERDE 

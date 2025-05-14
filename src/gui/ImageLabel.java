@@ -18,12 +18,15 @@ public class ImageLabel extends GradientLabel {
 	 * @param text
 	 * implicit pentru ImageLabel: NULL
 	 */
-	public ImageLabel(String text) {
+	public ImageLabel(String text,GradientLabel source) {
 		super(text);
 		setOpaque(true);
 		setBounds(250, 75, 300, 300);
 		initializarepoze();
 		setVisible(true);
+		 this.countZero = source.getCountZero();
+	     this.countOne = source.getCountOne();
+	     this.countdead=source.getCountdead();
 		// TODO Auto-generated constructor stub
 	}
 

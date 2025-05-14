@@ -25,7 +25,7 @@ public class HealthBar extends JPanel {
         setOpaque(false);
         setVisible(true);
         setBounds(280, 480, 250, 30);
-
+       
         progressBar = new JProgressBar(0, 100) {
             /**
 			 * 
