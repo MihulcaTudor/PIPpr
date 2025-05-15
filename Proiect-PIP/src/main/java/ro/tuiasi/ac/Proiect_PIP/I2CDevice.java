@@ -6,7 +6,7 @@ import java.time.Duration;
 import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2C;
 
-public abstract class I2CDevice{
+public abstract class I2CDevice extends Component{
 
     /**
      * The Default BUS and Device Address.
