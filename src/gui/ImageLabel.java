@@ -6,6 +6,12 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+/**
+ * Clasa pentru label ce afiseaza o imagine in functie de starea plantei
+ * Extinde clasa GradientLabel incat utilizeaza functia setStatusValue, si se schimba proportional cu obiectul respectiv
+ * @author AIDA
+ *
+ */
 public class ImageLabel extends GradientLabel {
 	/**
 	 * 

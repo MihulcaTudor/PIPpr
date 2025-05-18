@@ -9,14 +9,14 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 import javax.swing.JButton;
-
+/**
+ * Clasa pentru buton rotund care la hoverul mouse-ului isi schimba culoarea conturului, iar la apasare isi schimba culoarea interiorului
+ * @author AIDA
+ *
+ */
 public class CircleButton extends JButton{		
 
-	/**
-	 * Buton rotund
-* 
-*/
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 /**
  * variabila care indica cand mouse ul este hover peste buton
  */

@@ -19,12 +19,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 /**
+ * Label cu culoare in degrade si colturi rotunjite
+ * care isi schimba aparenta in functie de valorile citite din fisier, respectiv nivelul de umiditate al solului
+ * 
  * 
  * @author AIDA
- *clasa pentru un label cu culori in degrade si colturi rotunjite
  */
 public class GradientLabel extends JLabel {
-	 protected Color colorStart = Color.LIGHT_GRAY;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected Color colorStart = Color.LIGHT_GRAY;
 	 protected Color colorEnd = Color.DARK_GRAY;
 	 protected int countOne = 0;
 	 protected int countZero = 0;
@@ -47,25 +53,60 @@ public class GradientLabel extends JLabel {
         loadCounters();
     }
     
+    /**
+     * 
+     * @return
+     * De cate ori a fost citita valoarea 0- sol uscat
+     */
     public int getCountZero() {
     	return countZero;
     }
+    /**
+     * 
+     * @return
+     * De cate ori a fost citita valoarea 1- sol umed
+     */
     public int getCountOne() {
     	return countOne;
     }
+    /**
+     * 
+     * @return
+     * Starea plantei : 0- vie/ 1- moarta
+     */
     public int getCountdead() {
     	return countdead;
     }
+    /**
+     * Seteaza numarul de cate ori a fost citita precedent valoarea 0- la lansarea aplicatiei
+     * @param countZero
+     */
     public void setCountZero(int countZero) {
     	this.countZero=countZero;
     }
+    /**
+     * Seteaza numarul de cate ori a fost citita precedent valoarea 1 - la lansarea aplicatiei
+
+     * @param countOne
+     */
     public void setCountOne(int countOne) {
     	this.countOne=countOne;
     }
+    /**
+     *Seteaza valoarea logica pentru starea plantei - la lansarea aplicatiei
+
+     * @param countdead
+     * 1=moarta
+     * 0=vie
+     */
     public void setCountDead(int countdead)
     {
     	this.countdead=countdead;
     }
+    /**
+     * Functie aplelata la inciderea ferestrei, care salveaza intr un fisier text toate counterele spre 
+     * a fi incarcate la lansarea din nou a aplicatiei
+     */
     public void saveCounters() {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("src\\gui\\counters.txt"));
@@ -77,6 +118,10 @@ public class GradientLabel extends JLabel {
             e.printStackTrace();
         }
     }
+    /**
+     * Functie pentru citirea din fisier a valorilor salvate precedent ale counterelor ce indica
+     * umiditatea/starea plantei
+     */
     public void loadCounters() {
         File file = new File("src\\gui\\counters.txt");
         if (!file.exists()) {
@@ -103,7 +148,7 @@ public class GradientLabel extends JLabel {
      * Functie pentru afisarea textului respectiv nivelului de umiditate: pentru valori de 1, solul este OK, textul afisat corespunzator.-VERDE 
      * Pentru prea multe valori de 1 consecutive Labelul isi va schimba culoarea datorita udarii excesive.- GALBEN
      * Pentru mai putin de 20 de valori consecutive de 0, solul este uscat insa nu este o urgenta . GALBEN
-     * Pentru mai mult de 20 de valori de 0, soul trebuia udat imediat- ROSU
+     * Pentru mai mult de 20 de valori de 0, solul trebuia udat imediat- ROSU
      * pentru mai mult de 100 de valori de 0, plata este complet neglijata - GRI
      * @param valoare
      * valoarea citita din fisier: 0 sau 1

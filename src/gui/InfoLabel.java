@@ -7,7 +7,8 @@ import java.awt.Font;
 
 import javax.swing.SwingConstants;
 /**
- * clasa pentru un label ce afiseaza un mesaj. mosteneste clasa gradientlabel pentru ca ii foloseste metodele
+ * Clasa pentru un label ce afiseaza un mesaj. mosteneste clasa gradientlabel pentru ca ii foloseste metoda setStatusValue si isi
+ * schimba aspectul proportional cu obiectul respectiv
  * @author AIDA
  *
  */
@@ -17,6 +18,13 @@ public class InfoLabel extends GradientLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Initializeaza label ul, ii pune marginile si culorile necesare
+	 * @param text
+	 * implicit NULL deoarece se schimba in functia setStatusValue
+	 * @param source
+	 * referinta la obiect de tip GradientLabel pentru a avea acces la countere
+	 */
 
 	public InfoLabel(String text,GradientLabel source) {
 		
@@ -29,13 +37,21 @@ public class InfoLabel extends GradientLabel {
 	    setHorizontalAlignment(SwingConstants.CENTER);
 	    setVerticalAlignment(SwingConstants.CENTER);
 	    colorStart=Color.ORANGE;
-	    colorEnd=Color.GREEN;
+	    colorEnd=Color.PINK;
 	    this.countZero = source.getCountZero();
 	    this.countOne = source.getCountOne();
 	    this.countdead=source.getCountdead();
 		// TODO Auto-generated constructor stub
 	}
-	
+	/**
+	 * In functie de nivelul de umiditate citit si de numarul de repetari, 
+	 * labelul isi schimba aspectul dupa cum urmeaza:
+	 * pentru sol normal, afiseaza un mesaj de bun venit
+	 * pentru supraudare afiseaza mesaj de atentionare
+	 * pentru sol uscat afiseaza mesaj de atentionare catre udare
+	 * pentru planta moarta afiseaza un mesaj trist
+	 * pentru alta varianta afiseaza un mesaj de atentionare spre verificarea senzorului
+	 */
 	public void setStatusValue(String valoare) {
 		if ("1".equals(valoare)) {
 	        countOne++;

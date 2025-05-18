@@ -93,7 +93,16 @@ public class Planta extends JFrame {
 
     
  
-	
+	/**
+	 * Constructorul frame-ului cu urmatoarele functionalitati:
+	 * Foloseste un window listener pentru salvarea counterelor la inchiderea ferestrei;
+	 * Adauga panelul principal si cel de help la card layout;
+	 * Adauga butoanele care fac schimb intre aceste doua paneluri;
+	 * Adauga butonul de refresh la panelul principal si ii adauga un action Listener ce reseteaza toate counterele
+	 * Adauga labelurile principale la panelul respectiv ;
+	 * porneste citirea din fisier prin functia startMonitoring()
+	 * 
+	 */
 	public Planta() {
 		
 		addWindowListener(new WindowAdapter() {
@@ -115,6 +124,7 @@ public class Planta extends JFrame {
 		
 		
 		Help help=new Help();
+		
 		Meniuprincipal meniuprincipal=new Meniuprincipal();
 		
 		contentPane.add(meniuprincipal,"MainMenu");
@@ -182,10 +192,7 @@ public class Planta extends JFrame {
 		meniuprincipal.add(infolabel);
 		meniuprincipal.add(healthbar);
 		
-		
-		
-		
-		
+	
 		
 		startMonitoring(); // functia defiita mai jos
 		
@@ -193,7 +200,11 @@ public class Planta extends JFrame {
 		
 	}
 	
-
+/**
+ * Functie ce citeste in bucla infinita valorile din fisierul text suprascris cu valorile de la senzor si apeleaza functiile 
+ * de updatare a starilor labelurilor din meniul principal, cat si de status bar si de schimbare a datei udarii
+ * .Se foloseste un thread ce sta in sleep 500 ns, adica aplicatia va citi din fisier de doua ori pe secunda
+ */
 	private void startMonitoring() {
         Thread monitor = new Thread(new Runnable() { //thread nou pt citit  constant
             public void run() {
@@ -239,7 +250,7 @@ public class Planta extends JFrame {
 							}
 								 }
 						}
-                        Thread.sleep(800); //citeste de doua ori pe min
+                        Thread.sleep(500); //citeste de doua ori pe sec
                     } catch (Exception e) {
                         System.err.println("Eroare: " + e.getMessage());
                     }

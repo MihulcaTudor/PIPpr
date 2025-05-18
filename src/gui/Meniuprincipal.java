@@ -15,7 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
+/**
+ *
+ * Panelul din cardlayout care apare la lansarea aplicatiei:
+ * contine toate Labelurile ce isi schimba valoarea in functie de citirile de a senzor
+ * @author AIDA
+ *
+ */
 public class Meniuprincipal extends JPanel{
 	/**
 	 * 
@@ -24,7 +30,9 @@ public class Meniuprincipal extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 
-	
+	/**
+	 * Se initializeaza aspectul panelului si se adauga un mic label text cu  informatii despre butoanele principale
+	 */
 	public  Meniuprincipal()
 	{
 		

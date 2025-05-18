@@ -25,7 +25,18 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+/**
+ * 
+ * Panel afisat in urma apasarii butonului help, ce contine informatii despre proiect si figuri grafice
+ * @author AIDA
+ *
+ */
 public class Help extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Creeaza un obiect de tip Jpanel ce contine: un panel cu scrollbar in care se gasesc informatii despre proiect si un  panel cu trei iconuri ce contin fiecare informatii despre ce este in imagini.
 	 * informatiile apar atunci cand mouse ul da hover peste imagine. acestea sunt incluse intr un alt panel cu chenar si titlu
