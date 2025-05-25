@@ -21,7 +21,7 @@ public class PlantInfoPannelTest {
     @BeforeEach
     public void setUp() {
         dummyDateLabel = new DateLabel(null);
-        panel = new PlantInfoPannel(dummyDateLabel);
+        panel = new PlantInfoPannel(dummyDateLabel);;
     }
 
     /**

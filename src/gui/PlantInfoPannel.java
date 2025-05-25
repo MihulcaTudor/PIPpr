@@ -145,7 +145,7 @@ public class PlantInfoPannel extends JPanel {
         }
     /**
      * se salveaza in fisier text numele plantei introdus la tastatura de catre utilizator spre a fi incarcat la urmatoarea lansare a 
-     * aplicatiei pana la schimbarea numelui
+     * aplicatiei pana la schimbarea numelui;
      */
     private void savePlantTypeToFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src\\gui\\plant_type.txt"))) {

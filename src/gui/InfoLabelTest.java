@@ -48,7 +48,7 @@ public class InfoLabelTest {
     @Test
     public void testSetStatusValueZero_Under20() {
         infoLabel.setStatusValue("0");
-        assertEquals("Solul este proaspat udat! :)", infoLabel.getText());
+        assertEquals("Solul este proaspat udat! :)", infoLabel.getText());;
     }
 
     /**

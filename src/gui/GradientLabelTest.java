@@ -20,7 +20,7 @@ public class GradientLabelTest {
         label = new GradientLabel("Test");
         label.setCountOne(0);
         label.setCountZero(0);
-        label.setCountDead(0);
+        label.setCountDead(0);;
     }
 
     /**
