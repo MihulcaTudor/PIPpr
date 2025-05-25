@@ -8,12 +8,12 @@ import ro.tuiasi.ac.Proiect_PIP.I2CDevice;
 
 
 /**
- * Implementation of a LCDDisplay using GPIO with Pi4J
+ * Implementarea unui LCDDisplay folosind GPIO cu Pi4J
  * <p>
- * Works with the PCF8574T backpack, only.
+ * Functioneaza doar cu modulul PCF8574T.
  */
 public class LcdDisplay extends I2CDevice {
-    /** Flags for display commands */
+    /** Flags pentru comenzile display-ului */
     private static final byte LCD_CLEAR_DISPLAY   = (byte) 0x01;
     private static final byte LCD_RETURN_HOME     = (byte) 0x02;
     private static final byte LCD_SCROLL_RIGHT    = (byte) 0x1E;
@@ -24,29 +24,29 @@ public class LcdDisplay extends I2CDevice {
     private static final byte LCD_FUNCTION_SET    = (byte) 0x20;
     private static final byte LCD_SET_CGRAM_ADDR  = (byte) 0x40;
     private static final byte LCD_SET_DDRAM_ADDR  = (byte) 0x80;
-    // flags for display entry mode
+    // flags pentru display entry mode
     private static final byte LCD_ENTRY_RIGHT           = (byte) 0x00;
     private static final byte LCD_ENTRY_LEFT            = (byte) 0x02;
     private static final byte LCD_ENTRY_SHIFT_INCREMENT = (byte) 0x01;
     private static final byte LCD_ENTRY_SHIFT_DECREMENT = (byte) 0x00;
-    // flags for display on/off control
+    // flags pentru control display on/off 
     private static final byte LCD_DISPLAY_ON  = (byte) 0x04;
     private static final byte LCD_DISPLAY_OFF = (byte) 0x00;
     private static final byte LCD_CURSOR_ON   = (byte) 0x02;
     private static final byte LCD_CURSOR_OFF  = (byte) 0x00;
     private static final byte LCD_BLINK_ON    = (byte) 0x01;
     private static final byte LCD_BLINK_OFF   = (byte) 0x00;
-    // flags for display/cursor shift
+    // flags pentru display/cursor shift
     private static final byte LCD_DISPLAY_MOVE = (byte) 0x08;
     private static final byte LCD_CURSOR_MOVE  = (byte) 0x00;
-    // flags for function set
+    // flags pentru functia set
     private static final byte LCD_8BIT_MODE = (byte) 0x10;
     private static final byte LCD_4BIT_MODE = (byte) 0x00;
     private static final byte LCD_2LINE     = (byte) 0x08;
     private static final byte LCD_1LINE     = (byte) 0x00;
     private static final byte LCD_5x10DOTS  = (byte) 0x04;
     private static final byte LCD_5x8DOTS   = (byte) 0x00;
-    // flags for backlight control
+    // flags pentru control backlight 
     private static final byte LCD_BACKLIGHT     = (byte) 0x08;
     private static final byte LCD_NO_BACKLIGHT  = (byte) 0x00;
     private static final byte En                = (byte) 0b000_00100; // Enable bit
@@ -54,52 +54,52 @@ public class LcdDisplay extends I2CDevice {
     private static final byte Rs                = (byte) 0b000_00001; // Register select bit
   
     /**
-     * Display row offsets. Offset for up to 4 rows.
+     * Offset-ul liniilor display-ului. Offset-ul pentru pana la 4 linii.
      */
     private static final byte[] LCD_ROW_OFFSETS = {0x00, 0x40, 0x14, 0x54};
 
     private static final int DEFAULT_DEVICE = 0x27;
 
     /**
-     * Number of rows on the display
+     * Numar de linii de pe display
      */
     private final int rows;
     /**
-     * Number of columns on the display
+     * Numar de coloane de pe display
      */
     private final int columns;
     /**
-     * Is backlight is on or off
+     * Este lunima de fundal pornita on/off
      */
     private boolean backlight;
 
     /**
-     * Creates a new LCDDisplay component with default values
+     * Creeaza un nou component LCDDisplay cu valori implicite
      *
-     * @param pi4j Pi4J context
+     * @param pi4j Contextul Pi4J
      */
     public LcdDisplay(Context pi4j){
         this(pi4j, 2, 16, DEFAULT_DEVICE);
     }
 
     /**
-     * Creates a new LCDDisplay component with custom rows and columns
+     * Creeaza un nou component LCDDisplay cu un numar personalizat de linii si coloane
      *
-     * @param pi4j      Pi4J context
-     * @param rows      amount of display lines
-     * @param columns   amount of chars on each line
+     * @param pi4j      Contextul Pi4J
+     * @param rows      numarul de linii ale display-ului
+     * @param columns   numarul de caractere pe fiecare linie
      */
     public LcdDisplay(Context pi4j, int rows, int columns){
         this(pi4j, rows, columns, DEFAULT_DEVICE);
     }
 
     /**
-     * Creates a new LCDDisplay component with custom rows and columns
+     * Creeaza un nou component LCDDisplay cu un numar personalizat de linii si coloane
      *
-     * @param pi4j      Pi4J context
-     * @param rows      amount of display lines
-     * @param columns   amount of chars on each line
-     * @param device    I2C device address
+     * @param pi4j      Contextul Pi4J
+     * @param rows      numarul de linii ale display-ului
+     * @param columns   numarul de caractere pe fiecare linie
+     * @param device    Adresa dispozitivului I2C
      */
     public LcdDisplay(Context pi4j, int rows, int columns, int device) {
         super(pi4j, device, "PCF8574AT backed LCD");
@@ -109,7 +109,7 @@ public class LcdDisplay extends I2CDevice {
 
 
     /**
-     * Initializes the LCD with the backlight off
+     * Initializeaza LCD-ul cu lumina de fundal oprita
      */
     @Override
     protected void init(I2C i2c) {
@@ -130,7 +130,7 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Turns the backlight on or off
+     * Porneste sau opreste lumina de fundal
      */
     public void setDisplayBacklight(boolean backlightEnabled) {
         backlight = backlightEnabled;
@@ -144,7 +144,7 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Clear the LCD and set cursor to home
+     * Curata LCD-ul si muta cursorul la pozitia initiala
      */
     public void clearDisplay() {
         moveCursorHome();
@@ -152,14 +152,14 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Returns the Cursor to Home Position (First line, first character)
+     * Muta cursorul la pozitia de start (prima linie, primul caracter)
      */
     public void moveCursorHome() {
         sendLcdTwoPartsCommand(LCD_RETURN_HOME);
     }
 
     /**
-     * Shuts the display off
+     * Inchide display-ul
      */
     public void off() {
         try {
@@ -172,30 +172,30 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Write a line of text on the LCD
+     * Afiseaza o linie de text pe LCD
      *
-     * @param text Text to be displayed
-     * @param line linenumber of display, range: 0 .. rows-1
+     * @param text Textul care trebuie afisat
+     * @param line numarul liniei pe display, interval: 0 .. rows-1
      */
     public void displayLineOfText(String text, int line) {
         displayLineOfText(text, line, 0);
     }
 
     /**
-     * Center specified text in specified line
-     * @param text Text to be displayed
-     * @param line linenumber of display, range: 0 .. rows-1
+     * Centreaza textul specificat pe linia specificata
+     * @param text Textul care trebuie afișat
+     * @param line numărul liniei pe display, interval: 0 .. rows-1
      */
     public void centerTextInLine(String text, int line){
         displayLineOfText(text, line, (int) ((columns - text.length()) * 0.5));
     }
 
     /**
-     * Write a line of text on the LCD
+     * Afișează o linie de text pe LCD
      *
-     * @param text     text to be displayed
-     * @param line     line number of display, range: 0..rows-1
-     * @param position start position, range: 0..columns-1
+     * @param text     textul care trebuie afișat
+     * @param line     numărul liniei pe display, interval: 0..rows-1
+     * @param position poziția de start, interval: 0..columns-1
      */
     public void displayLineOfText(String text, int line, int position) {
         if (text.length() + position > columns) {
@@ -221,9 +221,9 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Write text on the LCD starting in home position
+     * Afișează textul pe LCD începând de la poziția de start
      *
-     * @param text Text to display
+     * @param text Textul care trebuie afișat
      */
     public void displayText(String text) {
     	System.out.println("Display in LCD: "+ text);
@@ -262,20 +262,20 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * write a character to LCD at current cursor position
+     * Scrie un caracter pe LCD la poziția curentă a cursorului
      *
-     * @param character  char that is written
+     * @param character caracterul care va fi scris
      */
     public void writeCharacter(char character) {
         sendLcdTwoPartsCommand((byte) character, Rs);
     }
 
     /**
-     * write a character to lcd at a specific position
+     * Scrie un caracter pe LCD la o poziție specifică
      *
-     * @param character char that is written
-     * @param line   row-position, Range 0 .. rows-1
-     * @param pos    col-position, Range 0 .. columns-1
+     * @param character caracterul care va fi scris
+     * @param line   poziția pe linie, interval: 0 .. rows-1
+     * @param pos    poziția pe coloană, interval: 0 .. columns-1
      */
     public void writeCharacter(char character, int line, int pos) {
         setCursorToPosition(line, pos);
@@ -283,10 +283,10 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * displays a line on a specific position
+     * Afișează o linie la o poziție specifică
      *
-     * @param text to display
-     * @param pos  for the start of the text
+     * @param text textul care trebuie afișat
+     * @param pos  poziția de start a textului
      */
     private void displayLine(String text, int pos) {
         sendLcdTwoPartsCommand((byte) (0x80 + pos));
@@ -297,9 +297,9 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Clears a line of the display
+     * Curăță o linie a display-ului
      *
-     * @param line line number of line to be cleared
+     * @param line numărul liniei care trebuie ștearsă
      */
     public void clearLine(int line) {
         if (line > rows || line < 1) {
@@ -309,10 +309,10 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Sets the cursor to a target destination
+     * Setează cursorul la o poziție țintă
      *
-     * @param line Selects the line of the display. Range: 0 - ROWS-1
-     * @param pos  Selects the character of the line. Range: 0 - Columns-1
+     * @param line Selectează linia display-ului. Interval: 0 - ROWS-1
+     * @param pos  Selectează caracterul de pe linie. Interval: 0 - Columns-1
      */
     public void setCursorToPosition(int line, int pos) {
         if (line > rows-1 || line < 0) {
@@ -326,11 +326,11 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Create a custom character by providing the single digit states of each pixel. Simply pass an Array of bytes
-     * which will be translated to a character.
+     * Creează un caracter personalizat oferind starea fiecărui pixel. Trebuie trimis un array de bytes
+     * care va fi transformat într-un caracter.
      *
-     * @param location  Set the memory location of the character. 1 - 7 is possible.
-     * @param character Byte array representing the pixels of a character
+     * @param location  Setează locația din memorie a caracterului. Valori permise: 1 - 7.
+     * @param character Array de bytes care reprezintă pixelii caracterului
      */
     public void createCharacter(int location, byte[] character) {
         if (character.length != 8) {
@@ -349,33 +349,36 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Scroll whole display to the right by one column.
+     * Scroll  întregul display la dreapta cu o coloană
      */
     public void scrollRight(){
         sendLcdTwoPartsCommand(LCD_SCROLL_RIGHT);
     }
 
     /**
-     * Scroll whole display to the left by one column.
+     * Scroll întregul display la stanga cu o coloană
      */
     public void scrollLeft(){
         sendLcdTwoPartsCommand(LCD_SCROLL_LEFT);
     }
 
+    /**
+     * Resetează display-ul (curăță și oprește)
+     */
     public void reset() {
         clearDisplay();
         off();
     }
 
     /**
-     * Write a command to the LCD
+     * Trimite o comandă către LCD
      */
     private void sendLcdTwoPartsCommand(byte cmd) {
         sendLcdTwoPartsCommand(cmd, (byte) 0);
     }
 
     /**
-     * Write a command in 2 parts to the LCD
+     * Trimite o comandă în două părți către LCD
      */
     private void sendLcdTwoPartsCommand(byte cmd, byte mode) {
         //bitwise AND with 11110000 to remove last 4 bits
@@ -385,9 +388,9 @@ public class LcdDisplay extends I2CDevice {
     }
 
     /**
-     * Write the four bits of a byte to the LCD
+     * Scrie cele patru biți ai unui byte către LCD
      *
-     * @param data the byte that is sent
+     * @param data byte-ul care este trimis
      */
     private void writeFourBits(byte data) {
         byte backlightStatus = backlight ? LCD_BACKLIGHT : LCD_NO_BACKLIGHT;
