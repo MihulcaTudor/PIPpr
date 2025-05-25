@@ -37,6 +37,9 @@ public class PlantInfoPannel extends JPanel {
      /**
 	 * 
 	 */
+	public String getPlantType() {
+	    return plantType;
+	}
 	
 	private static final long serialVersionUID = 1L;
 	JLabel sensorStatusLabel;
